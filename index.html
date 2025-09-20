@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración básica del documento HTML5 -->
+    <meta charset="UTF-8"> <!-- Define la codificación de caracteres UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Hace la página responsive -->
+    <title>Tienda Online 8craft - Desarrollo Fullstack II</title> <!-- Título de la página -->
+    <link rel="stylesheet" href="css/estilos.css"> <!-- Enlace a hoja de estilos externa 
+    <!--  enlace para utilizar componentes de bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- HEADER: Cabecera del sitio con navegación -->
+    <header> <!-- Etiqueta semántica HTML5 para cabecera -->
+        <nav> <!-- Etiqueta semántica HTML5 para navegación -->
+            <div class="logo">InfiniteCraft.store</div> <!-- Logo de la tienda -->
+            <!-- Lista de navegación con hipervínculos entre páginas -->
+            <ul class="menu"> <!-- Menú de navegación principal -->
+                <li><a href="#home">Inicio</a></li> <!-- Enlace a sección inicio -->
+                <li><a href="#productos">Productos</a></li> <!-- Enlace a productos -->
+                <li><a href="#nosotros">Nosotros</a></li> <!-- Enlace a nosotros -->
+                <li><a href="#contacto">Contacto</a></li> <!-- Enlace a contacto -->
+            </ul>
+            <!-- Botón del carrito con contador -->
+            <button onclick="abrirCarrito()" class="btn-carrito">
+                Carrito (<span id="contador-carrito">0</span>) <!-- Contador dinámico del carrito -->
+            </button>
+        </nav>
+    </header>
+
+    <main> <!-- Etiqueta semántica HTML5
+        <!-- SECCIÓN HOME: Página principal -->
+        <section id="home" class="seccion"> <!-- Section para organizar contenido -->
+            <h1>Bienvenido coleccionista!</h1> <!-- Título principal -->
+             <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000"> <!-- Agregar data-bs-interval para definir la duración de cada slide -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="./assets/img/banner.png" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./assets/img/banner1.png" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./assets/img/banner2.png" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        <h1>Transforma tus ideas en figuras 3D de resina unicas!</h1> <!-- Descripción -->
+        </div>
+
+        <!-- SECCIÓN PRODUCTOS: Lista de productos -->
+        <section id="productos" class="seccion"> <!-- Sección de productos -->
+            <h2>Nuestros Productos</h2> <!-- Título de sección -->
+            <div id="lista-productos" class="grid-productos"> <!-- Contenedor para productos -->
+                <!-- Los productos se cargarán dinámicamente con JavaScript -->
+            </div>
+        </section>
+
+        <!-- SECCIÓN REGISTRO: Formulario de registro de usuario -->
+        <section id="registro" class="seccion"> <!-- Sección de registro -->
+            <h2>Registro de Usuario</h2> <!-- Título del formulario -->
+            <form id="form-registro" onsubmit="return validarRegistro(event)"> <!-- Formulario con validación -->
+                <!-- Campo nombre completo -->
+                <label for="nombre">Nombre Completo:</label> <!-- Etiqueta asociada al input -->
+                <input type="text" id="nombre" required> <!-- Input requerido -->
+                
+                <!-- Campo correo con validación -->
+                <label for="correo">Correo:</label> <!-- Etiqueta para correo -->
+                <input type="email" id="correo" required> <!-- Input tipo email con validación HTML5 -->
+                
+                <!-- Campo contraseña -->
+                <label for="password">Contraseña:</label> <!-- Etiqueta para contraseña -->
+                <input type="password" id="password" required> <!-- Input tipo password -->
+                
+                <!-- Campo teléfono opcional -->
+                <label for="telefono">Teléfono (opcional):</label> <!-- Campo opcional -->
+                <input type="tel" id="telefono"> <!-- Input tipo teléfono -->
+                
+                <!-- Selector de región -->
+                <label for="region">Región:</label> <!-- Etiqueta para selector -->
+                <select id="region" onchange="actualizarComunas()"> <!-- Select con evento change -->
+                    <option value="">Seleccione región</option> <!-- Opción por defecto -->
+                </select>
+                
+                <!-- Selector de comuna -->
+                <label for="comuna">Comuna:</label> <!-- Etiqueta para comuna -->
+                <select id="comuna"> <!-- Select dependiente de región -->
+                    <option value="">Seleccione comuna</option> <!-- Opción por defecto -->
+                </select>
+                
+                <!-- Botón de envío -->
+                <button type="submit" class="btn-principal">Registrarse</button> <!-- Botón submit -->
+            </form>
+        </section>
+
+        <!-- SECCIÓN INICIAR SESIÓN: Formulario de login -->
+        <section id="login" class="seccion"> <!-- Sección de login -->
+            <h2>Iniciar Sesión</h2> <!-- Título -->
+            <form id="form-login" onsubmit="return validarLogin(event)"> <!-- Formulario con validación -->
+                <!-- Campo correo -->
+                <label for="login-correo">Correo:</label> <!-- Etiqueta -->
+                <input type="email" id="login-correo" required> <!-- Input email requerido -->
+                
+                <!-- Campo contraseña -->
+                <label for="login-password">Contraseña:</label> <!-- Etiqueta -->
+                <input type="password" id="login-password" required> <!-- Input password requerido -->
+                
+                <!-- Botón de inicio de sesión -->
+                <button type="submit" class="btn-principal">Iniciar Sesión</button> <!-- Botón submit -->
+            </form>
+        </section>
+
+        <!-- SECCIÓN NOSOTROS: Información de la empresa -->
+        <section id="nosotros" class="seccion"> <!-- Sección nosotros -->
+            <h2>Sobre Nosotros</h2> <!-- Título -->
+            <article> <!-- Article para contenido independiente -->
+                <p>Somos una Pyme dedicada a la impresión 3D personalizada, creada por un estudiante con pasión por la tecnología, el arte y la innovación.</p> <!-- Descripción -->
+                <p>Nos especializamos en crear figuras personalizadas a partir de fotos de referencia, utilizando diversos estilos de escultura digital para ofrecer productos únicos y detallados.</p> <!-- Información del servicio -->
+            </article>
+        </section>
+
+        <!-- SECCIÓN PASOS -->
+        <section id="Proceso" class="seccion"> <!-- Sección de pasos -->
+            <h2>Proceso</h2> <!-- Título -->
+            <div class="row"> <!-- Fila para las primeras 4 tarjetas -->
+                <!-- Tarjeta 1 -->
+                <div class="col-12 col-md-3 mb-3">
+                    <div class="step-card fade-in">
+                        <img src="./assets/img/1.png" class="card-img-top" alt="..."> <!-- Espacio para la imagen -->
+                        <h4>1. Análisis de Referencias</h4>
+                        <p>Estudio detallado de las fotos proporcionadas desde múltiples ángulos</p>
+                    </div>
+                </div>
+                <!-- Tarjeta 2 -->
+                <div class="col-12 col-md-3 mb-3">
+                    <div class="step-card fade-in">
+                        <img src="./assets/img/2.png" class="card-img-top" alt="..."> <!-- Espacio para la imagen -->
+                        <h4>2. Modelado 3D Profesional</h4>
+                        <p>Creación del modelo usando Blender y Shapr3D según complejidad</p>
+                    </div>
+                </div>
+                <!-- Tarjeta 3 -->
+                <div class="col-12 col-md-3 mb-3">
+                    <div class="step-card fade-in">
+                        <img src="./assets/img/3.png" class="card-img-top" alt="..."> <!-- Espacio para la imagen -->
+                        <h4>3. Software Paramétrico</h4>
+                        <p>Ajustes precisos de dimensiones y proporciones con herramientas paramétricas</p>
+                    </div>
+                </div>
+                <!-- Tarjeta 4 -->
+                <div class="col-12 col-md-3 mb-3">
+                    <div class="step-card fade-in">
+                        <img src="./assets/img/4.png" class="card-img-top" alt="..."> <!-- Espacio para la imagen -->
+                        <h4>4. Evaluación de Complejidad</h4>
+                        <p>Análisis técnico para determinar segmentación y soporte óptimos</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row"> <!-- Fila para las siguientes 4 tarjetas -->
+                <!-- Tarjeta 5 -->
+                <div class="col-12 col-md-3 mb-3">
+                    <div class="step-card fade-in">
+                        <img src="./assets/img/5.png" class="card-img-top" alt="..."> <!-- Espacio para la imagen -->
+                        <h4>5. Optimización para Impresión</h4>
+                        <p>Preparación del archivo con orientación y soportes ideales</p>
+                    </div>
+                </div>
+                <!-- Tarjeta 6 -->
+                <div class="col-12 col-md-3 mb-3">
+                    <div class="step-card fade-in">
+                        <img src="./assets/img/6.png" class="card-img-top" alt="..."> <!-- Espacio para la imagen -->
+                        <h4>6. Impresión en Elegoo Saturn 4 Ultra 16K</h4>
+                        <p>Impresión en alta resolución de última generación</p>
+                    </div>
+                </div>
+                <!-- Tarjeta 7 -->
+                <div class="col-12 col-md-3 mb-3">
+                    <div class="step-card fade-in">
+                        <img src="./assets/img/7.png" class="card-img-top" alt="..."> <!-- Espacio para la imagen -->
+                        <h4>7. Postprocesado en Anycubic Wash & Cure 3 Plus</h4>
+                        <p>Limpieza con IPA y curado UV controlado para máxima resistencia</p>
+                    </div>
+                </div>
+                <!-- Tarjeta 8 -->
+                <div class="col-12 col-md-3 mb-3">
+                    <div class="step-card fade-in">
+                        <img src="./assets/img/8.png" class="card-img-top" alt="..."> <!-- Espacio para la imagen -->
+                        <h4>8. Acabado Final</h4>
+                        <p>Pintado artístico a mano con técnicas y pulso profesionales</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIDEO embebido (requerido según rúbrica) -->
+        <section class="seccion"> <!-- Sección para video -->
+            <h2>Video Tutorial</h2> <!-- Título -->
+            <video width="320" height="240" controls> <!-- Elemento video con controles -->
+                <source src="video.mp4" type="video/mp4"> <!-- Fuente del video -->
+                Tu navegador no soporta el elemento video. <!-- Mensaje alternativo -->
+            </video>
+        </section>
+
+        <!-- SECCIÓN CONTACTO: Formulario de contacto -->
+        <section id="contacto" class="seccion"> <!-- Sección contacto -->
+            <h2>Contacto</h2> <!-- Título -->
+            <form id="form-contacto" onsubmit="return validarContacto(event)"> <!-- Formulario con validación -->
+                <!-- Campo nombre -->
+                <label for="contacto-nombre">Nombre:</label> <!-- Etiqueta -->
+                <input type="text" id="contacto-nombre" required> <!-- Input requerido -->
+                
+                <!-- Campo correo -->
+                <label for="contacto-correo">Correo:</label> <!-- Etiqueta -->
+                <input type="email" id="contacto-correo" required> <!-- Input email -->
+                
+                <!-- Campo mensaje -->
+                <label for="contacto-mensaje">Mensaje:</label> <!-- Etiqueta -->
+                <textarea id="contacto-mensaje" required></textarea> <!-- Textarea para mensaje largo -->
+                
+                <!-- Botón enviar -->
+                <button type="submit" class="btn-principal">Enviar Mensaje</button> <!-- Botón submit -->
+            </form>
+        </section>
+    </main>
+
+    <!-- FOOTER: Pie de página -->
+    <footer> <!-- Etiqueta semántica HTML5 para pie de página -->
+        <p>&copy; 2025 InfiniteCraft - Productos de Resina 3D - Todos los derechos reservados</p> <!-- Copyright -->
+        <p>Desarrollado para Evaluación DSY1104</p> <!-- Información adicional -->
+    </footer>
+
+    <!-- MODAL DEL CARRITO: Ventana emergente para el carrito -->
+    <div id="modal-carrito" class="modal" style="display:none;"> <!-- Modal oculto por defecto -->
+        <div class="modal-contenido"> <!-- Contenedor del modal -->
+            <span class="cerrar" onclick="cerrarCarrito()">&times;</span> <!-- Botón cerrar -->
+            <h2>Mi Carrito de Compras</h2> <!-- Título del carrito -->
+            <div id="items-carrito"> <!-- Contenedor de items del carrito -->
+                <!-- Los items se cargarán dinámicamente -->
+            </div>
+            <div id="total-carrito">Total: $0</div> <!-- Total del carrito -->
+            <button onclick="realizarCompra()" class="btn-principal">Pagar</button> <!-- Botón pagar -->
+        </div>
+    </div>
+
+    <!-- Scripts JavaScript -->
+    <script src="js/validaciones.js"></script> <!-- Script de validaciones -->
+    <script src="js/carrito.js"></script> <!-- Script del carrito -->
+    <script src="js/main.js"></script> <!-- Script principal -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script><!-- Bootstrap JS Bundle -->
+</body>
+</html>
