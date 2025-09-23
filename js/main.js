@@ -5,21 +5,21 @@ const productos = [
         id: 1, // Identificador único
         nombre: "Figura Personalizada 5 a 10cm", // Nombre del producto
         precio: 15000, // Precio en pesos chilenos
-        imagen: "https://via.placeholder.com/250x200", // URL de la imagen
+        imagen: "./assets/img/01.png", // URL de la imagen
         categoria: "pequeña", // Categoría del producto
     },
     { // Producto 2
         id: 2, // Identificador único
         nombre: "Figura Personalizada 10 a 15cm", // Nombre del producto
         precio: 22000, // Precio en pesos chilenos
-        imagen: "https://via.placeholder.com/250x200", // URL de la imagen
+        imagen: "./assets/img/02.png", // URL de la imagen
         categoria: "mediana", // Categoría del producto
     },
     { // Producto 3
         id: 3, // Identificador único
         nombre: "Figura Personalizada 15 a 20cm", // Nombre del producto
         precio: 33000, // Precio en pesos chilenos
-        imagen: "https://via.placeholder.com/250x200", // URL de la imagen
+        imagen: "./assets/img/03.png", // URL de la imagen
         categoria: "grande", // Categoría del producto
     },
 ];
